@@ -1,0 +1,26 @@
+{
+  "name": "nytsearch",
+  "version": "1.0.0",
+  "description": "A web MERN web application for searching, saving, and annotating articles from the New York Times.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bewitchedfencer/NYTSearch.git"
+  },
+  "author": "Alexa Robinson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bewitchedfencer/NYTSearch/issues"
+  },
+  "homepage": "https://github.com/bewitchedfencer/NYTSearch#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "mongoose": "^5.0.11"
+  }
+}
