@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 app.use(express.static("client/build"));
 
 //connecting the back-end routes to the server
-app.use(routes);
+app.use()(routes);
 
 // Set up promises with mongoose
 mongoose.Promise = global.Promise;
