@@ -10,7 +10,15 @@ class Home extends Component{
         query = "",
         endDate = Date.now,
         startDate = Date.now,
-        articles = []
+        articles = [],
+        savedArticles = []
+    };
+
+    componentDidMount = () => {
+        const alreadySaved = API.getSaved();
+        this.setState({
+            savedArticles:alreadySaved
+        });
     };
 
     handleInputChange = event => {
@@ -36,14 +44,18 @@ class Home extends Component{
 
     handleSaveSubmit = event => {
         event.preventDefault();
-        const savedArticle = {
+        const savedArt = {
             title:this.state.articles.headline.main,
             url:this.state.article.web_url,
             date:this.state.article.pub_date
         };
-        savedArticle(savedArticle);
+        API.savedArticle(savedArt);
     };
 
+    handleDelete = (event, id) => {
+        event.preventDefault();
+        API.baleted(id);
+    };
     render() {
         return (
             <div className="container fluid">
@@ -89,8 +101,27 @@ class Home extends Component{
                         {this.state.articles.map(article => (
                             <ArticleItem key={article.id}>
                                 <a href={article.web_url}><span><h3><strong>{article.headline.main}</strong></h3> <h4>{article.pub_date}</h4></span></a>
+                                <Button onClick={()=>this.handleSaveSubmit()}>Save</Button>
+                            </ArticleItem>
                         ))}
-                )}
+                    </ArticleBox>
+                ):(
+                    <h3>Search to find more articles to save.</h3>
+                )};
+                </Panel>
+                <Panel panelHeading="Saved Articles">
+                {this.state.savedArticles.length ? (
+                    <ArticleBox>
+                        {this.state.savedArticles.map(article => (
+                            <ArticleItem key={article._id}>
+                                <a href={article.url}><span><h3><strong>{article.title}</strong></h3> <h4>{article.date}</h4></span></a>
+                                <Button onClick={id=>this.handleDelete(id)}>Remove</Button>
+                            </ArticleItem>
+                        ))}
+                    </ArticleBox>
+                ):(
+                    <h3>Save more articles for later.</h3>
+                )};
                 </Panel>
             </div>
     )}

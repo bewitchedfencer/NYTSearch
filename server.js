@@ -2,6 +2,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require("body-parser");
+const models = require("./models");
 const routes = require('./routes/api.js');
 //set up express server
 const app = express();
@@ -21,7 +22,7 @@ app.use(routes);
 mongoose.Promise = global.Promise;
 // Connect to the Mongo DB
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist");
+  process.env.MONGODB_URI || "mongodb://localhost/nytreact");
 
   //set up the server to listen
 app.listen(PORT, function() {
