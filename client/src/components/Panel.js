@@ -5,7 +5,7 @@ const Panel = props => (
          <div className="panel-heading">
             <h3 className="panel-title">{props.panelHeading}</h3>
         </div>
-    <div className="panel-body"{...props}>
+    <div className="panel-body">{props.children}
     </div>
   </div>
 );

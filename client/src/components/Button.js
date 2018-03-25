@@ -1,7 +1,7 @@
 import React from "react";
 
 const Button = props =>(
-    <button className = "submitButton" {...props}>
+    <button className = "btn btn-success submitButton">{props.children}
     </button>
 );
 
