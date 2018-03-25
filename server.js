@@ -1,19 +1,19 @@
 //require dependencies
-const express = require('express');
+var express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require("body-parser");
 const models = require("./models");
 const routes = require('./routes/api.js');
 //set up express server
-const app = express();
+var app = express();
 const PORT = process.env.PORT || 3001;
 
 //configure parser for getting data from the front end
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use()(bodyParser.urlencoded({ extended: true }));
+app.use()(bodyParser.json());
 
 //connects server to the 'static' front-end assets
-app.use(express.static("client/build"));
+app.use()(express.static("client/build"));
 
 //connecting the back-end routes to the server
 app.use()(routes);

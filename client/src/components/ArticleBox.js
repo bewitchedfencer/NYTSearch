@@ -1,6 +1,6 @@
 import React from "react";
 
-export const ArticleBox = ({children}) => {
+const ArticleBox = ({children}) => {
     return (
         <div className="list-overflow-container">
             <ul className="list-group">
@@ -8,3 +8,5 @@ export const ArticleBox = ({children}) => {
             </ul>
         </div>
 )};
+
+export default ArticleBox;

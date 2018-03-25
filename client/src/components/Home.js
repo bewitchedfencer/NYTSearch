@@ -1,3 +1,4 @@
+import React, {Component} from 'react';
 import Panel from "./Panel.js";
 import Button from "./Button.js";
 import Input from "./Input.js";
@@ -7,15 +8,15 @@ import API from "../requests.js";
 
 class Home extends Component{
     state = {
-        query = "",
-        endDate = Date.now,
-        startDate = Date.now,
-        articles = [],
-        savedArticles = []
+        query : "",
+        endDate : "",
+        startDate : "",
+        articles : [],
+        savedArticles : []
     };
 
     componentDidMount = () => {
-        const alreadySaved = API.getSaved();
+        let alreadySaved = API.getSaved();
         this.setState({
             savedArticles:alreadySaved
         });
@@ -37,7 +38,7 @@ class Home extends Component{
         };
         API.getArticles(requestForArticles)
         .then(data => 
-        setState({
+        this.setState({
             articles:data.response.docs
         }));
     };
@@ -79,7 +80,7 @@ class Home extends Component{
                         <Input
                             value={this.state.startDate}
                             onChange={this.handleInputChange}
-                            name="start date"
+                            name="start_date"
                             placeholder="Start Date"
                         />
                         <br/>
@@ -88,7 +89,7 @@ class Home extends Component{
                         <Input
                             value={this.state.endDate}
                             onChange={this.state.endDate}
-                            name="end date"
+                            name="end_date"
                             placeholder="End Date"
                         />
                         <br/>
@@ -126,3 +127,5 @@ class Home extends Component{
             </div>
     )}
 };
+
+export default Home;
