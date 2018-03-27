@@ -15,14 +15,15 @@ class Home extends Component{
         savedArticles : []
     };
 
-    componentDidMount = () => {
-        let alreadySaved = API.getSaved();
-        this.setState({
-            savedArticles:alreadySaved
-        });
-    };
+    // componentDidMount = () => {
+    //     // let alreadySaved = API.getSaved();
+    //     this.setState({
+    //         savedArticles:alreadySaved
+    //     });
+    // };
 
     handleInputChange = event => {
+        console.log("handleInputChange");
         const {name, value} = event.target;
         this.setState({
             [name]:value
@@ -30,17 +31,19 @@ class Home extends Component{
     };
 
     handleFormSubmit = event => {
+        console.log("handleFormSubmit");
         event.preventDefault();
         const requestForArticles = {
             query:this.state.query,
             endDate:this.state.endDate,
             startDate:this.state.startDate
         };
+        console.log("requestForArticles:", requestForArticles);
         API.getArticles(requestForArticles)
-        .then(data => 
-        this.setState({
-            articles:data.response.docs
-        }));
+        .then(data => {
+            // console.log(data);
+            this.setState({articles:data.data.response.docs})
+        });
     };
 
     handleSaveSubmit = event => {
@@ -60,10 +63,10 @@ class Home extends Component{
     render() {
         return (
             <div className="container fluid">
-                <jumbotron>
+                <div className="jumbotron">
                     <h1>New York Times Article Scrubber</h1>
                     <h3>Search for and save articles of interest</h3>
-                </jumbotron>
+                </div>
                 <Panel panelHeading="Search">
                     <form>
                         <h4>Topic</h4>
@@ -80,7 +83,7 @@ class Home extends Component{
                         <Input
                             value={this.state.startDate}
                             onChange={this.handleInputChange}
-                            name="start_date"
+                            name="startDate"
                             placeholder="Start Date"
                         />
                         <br/>
@@ -89,28 +92,28 @@ class Home extends Component{
                         <Input
                             value={this.state.endDate}
                             onChange={this.handleInputChange}
-                            name="end_date"
+                            name="endDate"
                             placeholder="End Date"
                         />
                         <br/>
-                        <Button name="SearchBtn" onClick={this.handleFormSubmit}>Search</Button>
+                        <Button name="SearchBtn" buttonType ={"submit"} handleFormSubmit={this.handleFormSubmit}>Search</Button>
                     </form>    
                 </Panel>
                 <Panel panelHeading="Results">
                 {this.state.articles.length ? (
                     <ArticleBox>
                         {this.state.articles.map(article => (
-                            <ArticleItem key={article.id}>
+                            <ArticleItem key={article._id}>
                                 <a href={article.web_url}><span><h3><strong>{article.headline.main}</strong></h3> <h4>{article.pub_date}</h4></span></a>
                                 <Button onClick={()=>this.handleSaveSubmit()}>Save</Button>
                             </ArticleItem>
                         ))}
                     </ArticleBox>
-                ):(
+                ) : (
                     <h3>Search to find more articles to save.</h3>
-                )};
+                )}
                 </Panel>
-                <Panel panelHeading="Saved Articles">
+                {/* <Panel panelHeading="Saved Articles">
                 {this.state.savedArticles.length ? (
                     <ArticleBox>
                         {this.state.savedArticles.map(article => (
@@ -123,7 +126,7 @@ class Home extends Component{
                 ):(
                     <h3>Save more articles for later.</h3>
                 )};
-                </Panel>
+                </Panel> */}
             </div>
     )}
 };
