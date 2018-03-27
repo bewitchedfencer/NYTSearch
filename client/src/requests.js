@@ -11,7 +11,7 @@ getArticles: data=> {
 
 saveArticle: article => {
     console.log("saveArticle");
-    axios.post('/save', article);
+    return axios.post('/save', article);
 },
 
 getSaved: () => {

@@ -11,4 +11,8 @@ router.route('/savedArticles').get(articleController.getSaved),
 //deleting a saved article
 router.route('/deleteArticle').put(articleController.deleteArticle),
 
+router.use(function(req, res) {
+    res.sendFile(path.join(__dirname, "../client/build/index.html"));
+  });
+
 module.exports = router;
