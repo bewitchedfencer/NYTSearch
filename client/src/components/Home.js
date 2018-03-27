@@ -88,7 +88,7 @@ class Home extends Component{
                         <br/>
                         <Input
                             value={this.state.endDate}
-                            onChange={this.state.endDate}
+                            onChange={this.handleInputChange}
                             name="end_date"
                             placeholder="End Date"
                         />
