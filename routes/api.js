@@ -1,5 +1,6 @@
 //dependencies
 const router = require('express').Router();
+const path = require('path');
 const articleController = require('../controllers/articleController.js');
 
 //saving an article
