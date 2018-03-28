@@ -13,7 +13,8 @@ router.route('/savedArticles').get(articleController.getSaved),
 router.route('/deleteArticle').put(articleController.deleteArticle),
 
 router.use(function(req, res) {
-    res.sendFile(path.join(__dirname, "../client/build/index.html"));
+    console.log("*********", path.join(__dirname, "client/build/index.html"));
+    res.sendFile(path.join(__dirname, "client/build/index.html"));
   });
 
 module.exports = router;
